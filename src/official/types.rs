@@ -1,37 +1,7 @@
-
-use derive_builder::Builder;
 use serde_derive::{Deserialize, Serialize};
 use serde_json::Value;
 
-#[derive(Builder, Default, Debug)]
-#[builder(default, public, setter(into, strip_option))]
-pub struct PackageSearchParam {
-    pub query: Option<String>,
-    pub name: Option<String>,
-    pub description: Option<String>,
-    pub repo: Option<Repo>,
-    pub arch: Option<Arch>,
-    pub maintainer: Option<String>,
-    pub packager: Option<String>,
-    pub flagged: Option<IsFlagged>,
-}
-
-#[test]
-fn test_package_search_param_builder() {
-    let b = PackageSearchParamBuilder::default()
-        .query("query")
-        .name("name")
-        .repo(Repo::Core)
-        .arch(Arch::Any)
-        .flagged(IsFlagged::NotFlagged)
-        .build();
-
-    println!("PackageSearchParamBuilder: {:?}", b);
-
-    b.unwrap();
-}
-
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Repo {
     Core,
     CoreTesting,
@@ -54,7 +24,7 @@ impl Repo {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Arch {
     Any,
     X86_64,
@@ -64,12 +34,12 @@ impl Arch {
     pub fn to_query_param_value(&self) -> &str {
         match self {
             Self::Any => "any",
-            Self::X86_64 => "X86_64",
+            Self::X86_64 => "x86_64",
         }
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IsFlagged {
     Flagged,
     NotFlagged,
@@ -123,4 +93,34 @@ pub struct Package {
     pub optdepends: Vec<String>,
     pub makedepends: Vec<String>,
     pub checkdepends: Vec<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PackageDetails {
+    pub pkgname: String,
+    pub pkgbase: String,
+    pub repo: String,
+    pub arch: String,
+    pub pkgver: String,
+    pub pkgrel: String,
+    pub epoch: i64,
+    pub pkgdesc: String,
+    pub url: String,
+    pub filename: String,
+    pub compressed_size: i64,
+    pub installed_size: i64,
+    pub build_date: String,
+    pub last_update: String,
+    pub flag_date: Value,
+    pub maintainers: Vec<String>,
+    pub packager: String,
+    pub groups: Vec<Value>,
+    pub licenses: Vec<String>,
+    pub conflicts: Vec<Value>,
+    pub provides: Vec<Value>,
+    pub replaces: Vec<Value>,
+    pub depends: Vec<String>,
+    pub optdepends: Vec<Value>,
+    pub makedepends: Vec<Value>,
+    pub checkdepends: Vec<Value>,
 }

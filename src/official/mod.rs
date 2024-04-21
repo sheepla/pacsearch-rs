@@ -1,2 +1,3 @@
 pub mod search;
-pub mod search_types;
+pub mod types;
+pub mod details;
