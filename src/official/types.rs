@@ -124,3 +124,15 @@ pub struct PackageDetails {
     pub makedepends: Vec<Value>,
     pub checkdepends: Vec<Value>,
 }
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PackageInternalFiles {
+    pub pkgname: String,
+    pub repo: String,
+    pub arch: String,
+    pub pkg_last_update: String,
+    pub files_last_update: String,
+    pub files_count: i64,
+    pub dir_count: i64,
+    pub files: Vec<String>,
+}
