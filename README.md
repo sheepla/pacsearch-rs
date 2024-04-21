@@ -1,6 +1,6 @@
 # pacsearch
 
-**pacsearch** is a crate to search Arch Linux package repositories, official Web interface binding for Rust.
+**pacsearch** is a crate to search for Arch Linux package repositories, official Web interface binding for Rust.
 
 ## TODO
 
