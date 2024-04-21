@@ -6,7 +6,7 @@
 
 - [x] Search packages
 - [x] Get package detailed informations
-- [ ] Get package internal files
+- [x] Get package internal files
 
 ## TODO
 
