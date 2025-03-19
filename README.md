@@ -11,7 +11,7 @@
 ## TODO
 
 - [ ] support AUR
-- [ ] publish to crates.io
+- ~~[ ] publish to crates.io~~ - Pending
 
 ## Reference
 
